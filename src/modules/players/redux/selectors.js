@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { transformPositionName2Id, getInputStateName } from '../utils';
+import { transformPositionName2Id } from '../utils';
 
 const getPlayers = (state) => state.playersReqData;
 const getFilters = (state) => state.playersFilters;

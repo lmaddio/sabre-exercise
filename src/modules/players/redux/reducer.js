@@ -19,7 +19,7 @@ export const playersReqData = (state = initialState, action) => {
 
 export const playersInputData = (state = initialState, action) => {
   const {type, payload} = action;
-  switch (action.type) {
+  switch (type) {
     case INPUTS_PLAYERS.SET_INPUT_VALUE:
       return {...state, ...payload};
     case INPUTS_PLAYERS.CLEAR_INPUT_VALUES:

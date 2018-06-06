@@ -19,11 +19,6 @@ export const PLAYERS_POSITIONS = PLAYERS_ARRAY_POSITIONS.reduce((a, n)=>
     {[transformPositionName2Id(n)]: n}
   )
 );
-// FORM
-const INPUT_STATE = "STATE";
-export function getInputStateName(name) {
-  return [name, INPUT_STATE].join("_");
-}
 export const FORMS_FIELDS = [
   {
     type: "text",
@@ -47,4 +42,4 @@ export const FORMS_FIELDS = [
     onValid: (value) => !value || (value >= 18 && value <= 40),
     placeholder: "Age"
   }
-].map(c=>({...c, validateInput: getInputStateName(c.name)}));
+];

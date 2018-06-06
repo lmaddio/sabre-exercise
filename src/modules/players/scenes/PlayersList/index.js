@@ -21,7 +21,7 @@ class PlayersList extends Component {
   }
 
   render() {
-    const {players, checkIn} = this.props;
+    const {players} = this.props;
     return (
       <Container className="PlayersList">
         <Form action={this.props.setFilters} fields={FORMS_FIELDS}/>
