@@ -1,0 +1,6 @@
+.PlayersList .PlayersForm .form-group {
+  margin: 10px 0;
+}
+.PlayersList .PlayersForm input, .PlayersList .PlayersForm select {
+  width:  100% !important;
+}

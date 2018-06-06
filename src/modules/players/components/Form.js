@@ -3,14 +3,17 @@ import {
   Button, 
   Form, 
   FormGroup, 
-  Input
+  Input,
+  Col
 } from 'reactstrap';
 import { connect } from 'react-redux';
-
+// REDUX
 import {
   setInputState
 } from '../redux/actions';
 import { getInputsValues } from '../redux/selectors';
+// STYLES
+import './Form.css';
 
 class PlayersForm extends Component {
   componentDidMount() {
@@ -23,8 +26,8 @@ class PlayersForm extends Component {
 
   render() {
     return (
-      <Form inline style={{margin: "20px auto"}}>
-        <FormGroup >
+      <Form inline className="PlayersForm">
+        <FormGroup row style={{width: "100%"}}>
           { this.props.fields.map(({options, onValid, ...f})=>{
             let children = null;
             switch(f.type) {
@@ -45,10 +48,16 @@ class PlayersForm extends Component {
                   value={this.props.inputs[f.name] || ""} /> 
                 );
             }
-            return <FormGroup key={f.name} className="mb-2 mr-sm-2 mb-sm-0" children={children}/>
+            return (
+              <Col xs={12} sm={this.props.length % 2 === 0 ? 6 : 12} md={3} key={f.name}>
+                <FormGroup children={children}/>
+              </Col>
+            );
           })}
+          <Col xs={12} md={3} style={{textAlign: "right"}}>
+            <Button onClick={(e)=>this.props.action(this.props.inputs)} color="light">Search</Button>
+          </Col>
         </FormGroup>            
-        <Button onClick={(e)=>this.props.action(this.props.inputs)}>Search</Button>
       </Form>
     );
   }
