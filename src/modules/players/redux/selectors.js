@@ -15,7 +15,7 @@ export const getVisiblePlayers = createSelector(
         let _pValue = p[key];
         if(key === "position")
           _pValue = transformPositionName2Id(_pValue);
-        if(_pValue !== value)
+        if(value && _pValue !== value)
           return false;
       }
       return true;
