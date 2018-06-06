@@ -6,11 +6,14 @@ import {
 } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import {constants, reducer} from './players';
+import players from './players';
 
-const rootReducer = combineReducers({
-  [constants.NAME]: reducer
+const reducers = {};
+Object.entries(players.reducers).forEach(([key, value])=>{
+  reducers[key] = value;
 });
+
+const rootReducer = combineReducers(reducers);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

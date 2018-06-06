@@ -3,76 +3,61 @@ import {
   Button, 
   Form, 
   FormGroup, 
-  FormText,
-  Label, 
-  Input, 
-  Container,
-  Table
+  Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
 
-import { getPlayers } from '../redux/actions';
+import {
+  setInputState
+} from '../redux/actions';
+import { getInputsValues } from '../redux/selectors';
 
 class PlayersForm extends Component {
   componentDidMount() {
-    console.log("componentDidMount");
-    this.props.getPlayers();
+    this.props.setInputState();
+  }
+
+  _onChangeInput(e, name) {
+    this.props.setInputState({[name]: e.target.value});
   }
 
   render() {
     return (
-      <Container>
-        <Form inline style={{margin: "20px auto"}}>
-          <FormGroup >
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-              <Label for="exampleEmail" className="mr-sm-2">Email</Label>
-              <Input type="email" name="email" id="exampleEmail" placeholder="something@idk.cool" />
-            </FormGroup>
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-              <Label for="examplePassword" className="mr-sm-2">Password</Label>
-              <Input type="password" name="password" id="examplePassword" placeholder="don't tell!" />
-            </FormGroup>
-          </FormGroup>            
-          <Button>Submit</Button>
-        </Form>
-        <Table striped>
-          <thead>
-            <tr>
-              <th>Player</th>
-              <th>Position</th>
-              <th>Team</th>
-              <th>Age</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </Table>
-      </Container>
+      <Form inline style={{margin: "20px auto"}}>
+        <FormGroup >
+          { this.props.fields.map(({options, onValid, ...f})=>{
+            let children = null;
+            switch(f.type) {
+              case "select":
+                children = (
+                  <Input {...f}
+                    onChange={(e)=>this._onChangeInput(e, f.name, onValid)} 
+                    value={this.props.inputs[f.name] || ""} >
+                    {Object.entries(options).map(([key, value])=>(
+                      <option key={key} value={key}>{value}</option>
+                    ))}
+                  </Input>
+                );
+              break;
+              default: 
+                children = (<Input {...f}
+                  onChange={(e)=>this._onChangeInput(e, f.name, onValid)} 
+                  value={this.props.inputs[f.name] || ""} /> 
+                );
+            }
+            return <FormGroup key={f.name} className="mb-2 mr-sm-2 mb-sm-0" children={children}/>
+          })}
+        </FormGroup>            
+        <Button onClick={(e)=>this.props.action(this.props.inputs)}>Search</Button>
+      </Form>
     );
   }
 }
 
-function mapStateToProps({players}) {
-    console.log("mapStateToProps", players);
-    return {};
-}
+function mapStateToProps(state) {
+  return {
+    inputs: getInputsValues(state)
+  };
+};
 
-export default connect(mapStateToProps, {getPlayers})(PlayersForm);
+export default connect(mapStateToProps, { setInputState })(PlayersForm);
