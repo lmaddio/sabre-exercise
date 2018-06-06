@@ -24,9 +24,6 @@ class PlayersList extends Component {
     const {players, checkIn} = this.props;
     return (
       <Container className="PlayersList">
-        {
-          checkIn && <p className="loading">Loading</p>
-        }
         <Form action={this.props.setFilters} fields={FORMS_FIELDS}/>
         { 
           players.length > 0 ? <Table columns={TABLE_COLUMNS} rows={players.map(a=>Object.values(a))}/> : null

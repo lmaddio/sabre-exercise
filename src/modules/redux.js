@@ -6,10 +6,15 @@ import {
 } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
+import core from './core';
 import players from './players';
 
 const reducers = {};
 Object.entries(players.reducers).forEach(([key, value])=>{
+  reducers[key] = value;
+});
+
+Object.entries(core.reducers).forEach(([key, value])=>{
   reducers[key] = value;
 });
 

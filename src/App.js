@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 
-import Header from './components/Header';
-import {PlayersList} from './modules/players/scenes';
+import core from './modules/core';
+import players from './modules/players';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header/>
-        <PlayersList.default/>
+        <core.components.Header.default/>
+        <players.pages.PlayersList.default/>
+        <core.components.Loader.default/>
       </div>
     );
   }

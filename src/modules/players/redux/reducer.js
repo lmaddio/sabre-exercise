@@ -3,8 +3,6 @@ import { GET_PLAYERS, FILTER_PLAYERS, INPUTS_PLAYERS } from './actionTypes';
 const initialState = {};
 
 export const playersReqData = (state = initialState, action) => {
-  // if(action.type.indexOf("@@redux/") === -1)
-  //   console.log("reducer: playersReqData", state, action);
   switch (action.type) {
     case GET_PLAYERS.PENDING:
       return {
@@ -20,8 +18,6 @@ export const playersReqData = (state = initialState, action) => {
 };
 
 export const playersInputData = (state = initialState, action) => {
-  // if(action.type.indexOf("@@redux/") === -1)
-  //   console.log("reducer: playersInputData", state, action);
   const {type, payload} = action;
   switch (action.type) {
     case INPUTS_PLAYERS.SET_INPUT_VALUE:
@@ -34,8 +30,6 @@ export const playersInputData = (state = initialState, action) => {
 }
 
 export function playersFilters(state = initialState, action) {
-  // if(action.type.indexOf("@@redux/") === -1)
-  //   console.log("reducer: playersFilters", state, action);
   switch (action.type) {
     case FILTER_PLAYERS.SET_FILTERS:
       return {...action.payload};

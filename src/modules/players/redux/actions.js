@@ -1,6 +1,6 @@
 import { GET_PLAYERS, FILTER_PLAYERS, INPUTS_PLAYERS } from './actionTypes';
 import { getPlayersData } from './services';
-// UTILS
+import core from '../../core';
 import { formatPlayersData } from '../utils';
 
 // REQUEST PLAYERS DATA
@@ -18,9 +18,13 @@ const successRequestPlayers = (data) => ({
 export function getPlayers() {
   return async dispatch => {
     // Set REQUEST state
+    dispatch(core.actions.showLoader());
+    // Show Loader
     dispatch(startRequestPlayers());
     // Get data
     const {data, error} = await getPlayersData();
+    // Hide loader
+    dispatch(core.actions.hideLoader());
     return dispatch(
       !data 
       ? errorRequestPlayers(error  || "Failed to fetch") 
