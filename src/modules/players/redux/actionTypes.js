@@ -5,7 +5,6 @@ import {
   PENDING, 
   SUCCESS,
   SET_INPUT_VALUE,
-  CLEAR_INPUT_VALUES,
   SET_FILTERS,
   CLEAR_FILTERS,
 } from './stateConstants';
@@ -15,4 +14,4 @@ export const GET_PLAYERS = defineAction('GET_PLAYERS',
 
 export const FILTER_PLAYERS = defineAction('FILTER_PLAYERS', [SET_FILTERS, CLEAR_FILTERS], NAME);
 
-export const INPUTS_PLAYERS = defineAction('INPUTS_PLAYERS', [SET_INPUT_VALUE, CLEAR_INPUT_VALUES], NAME);
+export const INPUTS_PLAYERS = defineAction('INPUTS_PLAYERS', [SET_INPUT_VALUE], NAME);

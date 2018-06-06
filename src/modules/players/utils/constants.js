@@ -20,11 +20,17 @@ export const PLAYERS_POSITIONS = PLAYERS_ARRAY_POSITIONS.reduce((a, n)=>
   )
 );
 // FORM
+const INPUT_STATE = "STATE";
+export function getInputStateName(name) {
+  return [name, INPUT_STATE].join("_");
+}
 export const FORMS_FIELDS = [
   {
     type: "text",
     name: "name",
-    onValid: (value)=> new RegExp(/[a-zåäö ]/i).test(value),
+    onValid: (value)=> !value || new RegExp(/^[a-zA-Z]+$/i).test(value),
+    // pattern only invalids the submit action
+    // pattern: "[a-zA-Z]",
     placeholder: "Player Name"
   },
   {
@@ -38,6 +44,7 @@ export const FORMS_FIELDS = [
     name: "age",
     min: 18,
     max: 40,
+    onValid: (value) => !value || (value >= 18 && value <= 40),
     placeholder: "Age"
   }
-];
+].map(c=>({...c, validateInput: getInputStateName(c.name)}));

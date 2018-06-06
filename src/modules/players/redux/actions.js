@@ -30,16 +30,13 @@ export function getPlayers() {
 };
 
 // MANAGE INPUT STATES
-const clearInputPlayers = () => ({
-  type: INPUTS_PLAYERS.CLEAR_INPUT_VALUES
-});
 const setInputPlayersValue = (data) => ({
   type: INPUTS_PLAYERS.SET_INPUT_VALUE,
   payload: data
 });
 export function setInputState(props) {
   return dispatch => 
-    dispatch(props ? setInputPlayersValue(props) : clearInputPlayers())
+    dispatch(setInputPlayersValue(props))
 }
 
 // MANAGE FILTERS FOR PLAYERS
