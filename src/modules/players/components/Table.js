@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Table
 } from 'reactstrap';
@@ -10,6 +11,10 @@ const Row = ({cols})=>(
     ))}
   </tr>
 );
+
+Row.propTypes = {
+  cols: PropTypes.arrayOf(PropTypes.string)
+};
 
 const TableContent = ({columns, rows})=> (
   <Table striped style={{textTransform: "capitalize"}}>
@@ -27,5 +32,13 @@ const TableContent = ({columns, rows})=> (
     </tbody>
   </Table>
 );
+
+TableContent.propTypes = {
+  columns: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string,
+    key: PropTypes.string
+  })),
+  rows: PropTypes.arrayOf(PropTypes.array),
+};
 
 export default TableContent;

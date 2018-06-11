@@ -7,8 +7,3 @@ export const showLoader = () => ({
 export const hideLoader = () => ({
   type: LOADER.HIDE
 });
-
-export function setWithDispatchLoader(state) {
-  return dispatch =>
-    dispatch(state ? showLoader : hideLoader)
-}

@@ -2,16 +2,17 @@ import { GET_PLAYERS, FILTER_PLAYERS, INPUTS_PLAYERS } from './actionTypes';
 import { getPlayersData } from './services';
 import core from '../../core';
 import { formatPlayersData } from '../utils';
+import { FETCH_GENERIC_ERROR } from './constants';
 
 // REQUEST PLAYERS DATA
-const startRequestPlayers = () => ({
+export const startRequestPlayers = () => ({
   type: GET_PLAYERS.PENDING
 });
-const errorRequestPlayers = (error) => ({
+export const errorRequestPlayers = (error) => ({
   type: GET_PLAYERS.ERROR,
   error
 });
-const successRequestPlayers = (data) => ({
+export const successRequestPlayers = (data) => ({
   type: GET_PLAYERS.SUCCESS,
   payload: data
 });
@@ -27,7 +28,7 @@ export function getPlayers() {
     dispatch(core.actions.hideLoader());
     return dispatch(
       !data 
-      ? errorRequestPlayers(error  || "Failed to fetch") 
+      ? errorRequestPlayers(error  || FETCH_GENERIC_ERROR) 
       : successRequestPlayers(formatPlayersData(data))
     );
   };
@@ -44,10 +45,10 @@ export function setInputState(props) {
 }
 
 // MANAGE FILTERS FOR PLAYERS
-const clearFilters = () => ({
+export const clearFilters = () => ({
   type: FILTER_PLAYERS.CLEAR_FILTERS
 });
-const setFiltersValue = (data) => ({
+export const setFiltersValue = (data) => ({
   type: FILTER_PLAYERS.SET_FILTERS,
   payload: data
 });

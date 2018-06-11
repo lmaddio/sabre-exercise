@@ -10,7 +10,7 @@ export const getVisiblePlayers = createSelector(
   (players, filters) => {
     const entries = Object.entries(filters).filter(([k,v={}])=>v.value).map(([k,v])=>[k, v.value.toLowerCase()]);
     if(entries.length === 0)
-      return players.data || [];
+      return players.data ? players.data.map(a=>Object.values(a)) : [];
 
     const _players = players.data.filter(p => {
       for (let [key, value] of entries) {
@@ -27,7 +27,7 @@ export const getVisiblePlayers = createSelector(
       }
       return true;
     });
-    return _players;
+    return _players ? _players.map(a=>Object.values(a)) : [];
   }
 )
 
@@ -35,7 +35,7 @@ const getInputs = (state) => state.playersInputData;
 
 export const getInputsValues = createSelector(
   [ getInputs ],
-  (inputs) => {
+  (inputs={}) => {
     const buttonDisabled = Object.entries(inputs).some(([key, value])=>
       value.state === false
     );

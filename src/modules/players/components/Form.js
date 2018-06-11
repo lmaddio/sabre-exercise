@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { 
   Button, 
   Form, 
@@ -93,6 +94,23 @@ function mapStateToProps(state) {
   return {
     inputs: getInputsValues(state)
   };
+};
+
+const inputValue = PropTypes.shape({
+  value: PropTypes.string.isRequired,
+  state: PropTypes.bool.isRequired
+});
+
+PlayersForm.propTypes = {
+  inputs: PropTypes.shape({
+    name: inputValue,
+    age: inputValue,
+    position: inputValue,
+    buttonDisabled: PropTypes.bool.isRequired
+  }).isRequired,
+  action: PropTypes.func.isRequired,
+  setInputState: PropTypes.func.isRequired,
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default connect(mapStateToProps, { setInputState })(PlayersForm);

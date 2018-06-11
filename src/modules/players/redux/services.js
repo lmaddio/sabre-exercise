@@ -1,4 +1,4 @@
-const PLAYERS_URL = "https://football-players-b31f2.firebaseio.com/players.json?print=pretty";
+import { PLAYERS_URL } from './constants';
 
 export async function getPlayersData(){
   try {

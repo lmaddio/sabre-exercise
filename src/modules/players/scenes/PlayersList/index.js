@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   Container
 } from 'reactstrap';
@@ -26,7 +27,7 @@ class PlayersList extends Component {
       <Container className="PlayersList">
         <Form action={this.props.setFilters} fields={FORMS_FIELDS}/>
         { 
-          players.length > 0 ? <Table columns={TABLE_COLUMNS} rows={players.map(a=>Object.values(a))}/> : null
+          players.length > 0 ? <Table columns={TABLE_COLUMNS} rows={players}/> : null
         }
       </Container>
     );
@@ -37,6 +38,11 @@ function mapStateToProps(state) {
   return {
     players: getVisiblePlayers(state)
   };
+};
+
+PlayersList.propTypes = {
+  getPlayers: PropTypes.func.isRequired,
+  players: PropTypes.arrayOf(PropTypes.array).isRequired
 };
 
 export default connect(mapStateToProps, { getPlayers, setFilters })(PlayersList);
